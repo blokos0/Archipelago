@@ -16,8 +16,6 @@ class SMB1RWorld(World):
 
     game = "Super Mario Bros. Remastered"
 
-    origin_region_name = "Level Select"
-
     web = web_world.SMB1RWebWorld()
 
     options_dataclass = smb1roptions.SMB1ROptions
@@ -35,6 +33,9 @@ class SMB1RWorld(World):
 
     def create_items(self) -> None:
         items.create_all_items(self)
+        #self.multiworld.local_early_items[self.player][f"World {self.options.starting_world} Item"] = 1
+        from Utils import visualize_regions
+        visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
 
     def create_item(self, name: str) -> items.SMB1RItem:
         return items.create_item_with_correct_classification(self, name)

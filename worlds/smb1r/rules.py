@@ -14,7 +14,7 @@ def set_all_rules(world: SMB1RWorld) -> None:
 
 def set_all_entrance_rules(world: SMB1RWorld) -> None:
     for i in range(8):
-        entrance = world.get_entrance(f"Level Select to World {i + 1}")
+        entrance = world.get_entrance(f"Menu to World {i + 1}")
         set_rule(entrance, lambda state: state.has(f"World {i + 1} Item", world.player))
 
     worldminus1entrance = world.get_entrance("World 1 to World -1")

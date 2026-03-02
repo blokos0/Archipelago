@@ -14,7 +14,7 @@ def create_and_connect_regions(world: SMB1RWorld) -> None:
 def create_all_regions(world: SMB1RWorld) -> None:
     regions = []
 
-    regions.append(Region("Level Select", world.player, world.multiworld))
+    regions.append(Region("Menu", world.player, world.multiworld))
     for i in range(8):
         regions.append(Region(f"World {i + 1}", world.player, world.multiworld))
 
@@ -23,11 +23,11 @@ def create_all_regions(world: SMB1RWorld) -> None:
     world.multiworld.regions += regions
 
 def connect_regions(world: SMB1RWorld) -> None:
-    level_select = world.get_region("Level Select")
+    level_select = world.get_region("Menu")
 
     for i in range(8):
         region = world.get_region(f"World {i + 1}")
-        level_select.connect(region, f"Level Select to World {i + 1}")
+        level_select.connect(region, f"Menu to World {i + 1}")  
     
     world1 = world.get_region("World 1")
     worldminus1 = world.get_region("World -1")
