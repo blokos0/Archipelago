@@ -44,6 +44,12 @@ class SMB1RWorld(World):
         return "NOTHING!"
 
     def fill_slot_data(self) -> Mapping[str, Any]:
-        return self.options.as_dict(
+        levelorder = {}
+        for i in range(8):
+            levels = [1, 2, 3, 4]
+            self.random.shuffle(levels)
+            levelorder[i + 1] = levels
+        opts = self.options.as_dict(
             "starting_world", "campaigns"
         )
+        return opts | {"levelorder": levelorder}

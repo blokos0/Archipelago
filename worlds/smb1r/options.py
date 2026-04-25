@@ -16,13 +16,13 @@ class StartingWorld(Range):
 
 class Campaigns(OptionSet):
     """
-    Which campaigns will be available for play.
+    Which campaigns will be available for play. (doesnt do anything right now
     """
 
     display_name = "Campaigns"
 
-    valid_keys = ["SMB", "SMBTLL", "ANN:SMB", "SMBS"]
-    default = ["SMB"]
+    valid_keys = ["smb", "tll", "ann", "smbs"]
+    default = ["smb"]
     
     valid_keys_casefold = True
 

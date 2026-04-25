@@ -30,7 +30,7 @@ def create_all_items(world: SMB1RWorld) -> None:
     itempool: list[Item] = []
     for i in range(8):
         item = world.create_item(f"World {i + 1} Item")
-        if i + 1 == world.options.starting_world:
+        if i + 1 == world.options.starting_world.value:
             world.push_precollected(item)
         else:
             itempool.append(item)
