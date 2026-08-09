@@ -34,6 +34,7 @@ class SMB1RWorld(World):
     def create_items(self) -> None:
         items.create_all_items(self)
         #self.multiworld.local_early_items[self.player][f"World {self.options.starting_world} Item"] = 1
+        # make sure to remove this later
         from Utils import visualize_regions
         visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
 
