@@ -31,10 +31,12 @@ def create_locations(world: SMB1RWorld) -> None:
     for i in range(8):
         region = world.get_region(f"World {i + 1}")
         region.add_locations(get_location_names_with_ids([f"{i + 1}-1", f"{i + 1}-2", f"{i + 1}-3", f"{i + 1}-4"]), SMB1RLocation)
-        if i + 1 == 8:
-            region.add_event(
-               "Completed 8-4", "Victory", location_type=SMB1RLocation, item_type=items.SMB1RItem
-            )
+        region.add_event(
+            f"Completed {i + 1}-4", "Bowser Defeated", location_type=SMB1RLocation, item_type=items.SMB1RItem
+        )
 
     worldminus1 = world.get_region("World -1")
     worldminus1.add_locations(get_location_names_with_ids(["-1", "-2", "-3"]))
+    worldminus1.add_event(
+        f"Completed -3", "Bowser Defeated", location_type=SMB1RLocation, item_type=items.SMB1RItem
+    )

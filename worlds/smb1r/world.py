@@ -33,16 +33,12 @@ class SMB1RWorld(World):
 
     def create_items(self) -> None:
         items.create_all_items(self)
-        #self.multiworld.local_early_items[self.player][f"World {self.options.starting_world} Item"] = 1
-        # make sure to remove this later
-        from Utils import visualize_regions
-        visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
 
     def create_item(self, name: str) -> items.SMB1RItem:
         return items.create_item_with_correct_classification(self, name)
 
     def get_filler_item_name(self) -> str:
-        return "NOTHING!"
+        return items.get_random_filler_item_name(self)
 
     def fill_slot_data(self) -> Mapping[str, Any]:
         levelorder = {}

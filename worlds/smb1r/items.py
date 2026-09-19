@@ -16,6 +16,12 @@ for i in range(8):
     ITEM_CLASSIFICATIONS[f"World {i + 1} Item"] = ItemClassification.progression
     ind += 1
 
+traps = ["Niconico Trap"]
+for t in traps:
+    ITEM_NAME_TO_ID[t] = ind
+    ITEM_CLASSIFICATIONS[t] = ItemClassification.trap
+    ind += 1
+
 ITEM_NAME_TO_ID["NOTHING!"] = ind
 ITEM_CLASSIFICATIONS["NOTHING!"] = ItemClassification.filler
 
@@ -26,6 +32,16 @@ def create_item_with_correct_classification(world: SMB1RWorld, name: str) -> SMB
     classification = ITEM_CLASSIFICATIONS[name]
     return SMB1RItem(name, classification, ITEM_NAME_TO_ID[name], world.player)
 
+def get_random_filler_item_name(world: SMB1RWorld) -> str:
+    enabled_traps = []
+    if world.options.niconico_trap.value:
+        enabled_traps.append("Niconico Trap")
+
+    if len(enabled_traps) > 0: # account for having >0 trap percentage but no enabled traps (lol
+        if world.random.randint(0, 99) < world.options.trap_percentage.value:
+            return world.random.choice(enabled_traps)
+    return "NOTHING!"
+
 def create_all_items(world: SMB1RWorld) -> None:
     itempool: list[Item] = []
     for i in range(8):
@@ -35,9 +51,7 @@ def create_all_items(world: SMB1RWorld) -> None:
         else:
             itempool.append(item)
 
-    number_of_items = len(itempool)
-    number_of_unfilled_locations = len(world.multiworld.get_unfilled_locations(world.player))
-    needed_number_of_filler_items = number_of_unfilled_locations - number_of_items
-    itempool += [world.create_filler() for _ in range(needed_number_of_filler_items)]
+    empty_spots = len(world.multiworld.get_unfilled_locations(world.player)) - len(itempool)
+    itempool += [world.create_filler() for _ in range(empty_spots)]
 
     world.multiworld.itempool += itempool
