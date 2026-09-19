@@ -4,7 +4,7 @@ from Options import OptionGroup, PerGameCommonOptions, Range, OptionSet
 
 class StartingWorld(Range):
     """
-    Which world will be unlocked by default. (You can use YAML randomization for extra randomness!)
+    Which world will be unlocked by default? (You can use YAML randomization for extra randomness!)
     """
 
     display_name = "Starting World"
@@ -16,13 +16,13 @@ class StartingWorld(Range):
 
 class Campaigns(OptionSet):
     """
-    Which campaigns will be available for play. (doesnt do anything right now
+    Which campaigns will be available and accounted for in randomization?
     """
 
     display_name = "Campaigns"
 
-    valid_keys = ["smb", "tll", "ann", "smbs"]
-    default = ["smb"]
+    valid_keys = ["SMB1", "SMBLL", "SMBS", "SMBANN"]
+    default = ["SMB1"]
     
     valid_keys_casefold = True
 
@@ -33,14 +33,14 @@ class SMB1ROptions(PerGameCommonOptions):
 
 option_groups = [
     OptionGroup(
-        "The Only Group:tm:",
+        "Gameplay",
         [StartingWorld, Campaigns],
     )
 ]
 
 option_presets = {
-    "The Only Preset:tm:": {
-        "campaigns": ["SMB"],
+    "Default": {
+        "campaigns": ["SMB1"],
         "starting_world": 1
     }
 }
